@@ -1,0 +1,2 @@
+import { Injectable } from '@angular/core';
+@Injectable({providedIn:'root'}) export class AnimationService { private frame=0; private last=0; time=0; start(step:(dt:number)=>void){if(this.frame)return;const loop=(now:number)=>{if(this.last)this.time+=(now-this.last)/1000;const dt=this.last?Math.min((now-this.last)/1000,.05):0;this.last=now;step(dt);this.frame=requestAnimationFrame(loop);};this.frame=requestAnimationFrame(loop);} stop(){cancelAnimationFrame(this.frame);this.frame=0;this.last=0;} reset(){this.time=0;} }
